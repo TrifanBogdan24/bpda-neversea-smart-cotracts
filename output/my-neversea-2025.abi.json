@@ -1,0 +1,163 @@
+{
+    "buildInfo": {
+        "contractCrate": {
+            "name": "my-neversea-2025",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.66.3"
+        }
+    },
+    "docs": [
+        "NeverSea Festival 2025 registration contract."
+    ],
+    "name": "MyNeversea2025",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "registration_fee",
+                "type": "BigUint"
+            },
+            {
+                "name": "registration_fee_vip",
+                "type": "BigUint"
+            }
+        ],
+        "outputs": []
+    },
+    "upgradeConstructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "docs": [
+                "Pay `registration_fee` -> regular participant,",
+                "pay `registration_fee_vip` -> VIP participant, anything else is rejected."
+            ],
+            "name": "register",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Register with a 50% discount code (regular or VIP, depending on the amount paid)."
+            ],
+            "name": "registerWithDiscount",
+            "rustMethodName": "register_with_discount",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [
+                {
+                    "name": "code",
+                    "type": "bytes"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Owner updates only the regular registration fee."
+            ],
+            "name": "updateRegistrationFees",
+            "rustMethodName": "update_registration_fees",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "new_fee",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Owner updates both fees (e.g. switch from Early Bird to Full price)."
+            ],
+            "name": "updateAllFees",
+            "rustMethodName": "update_all_fees",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "registration_fee",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "registration_fee_vip",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getParticipants",
+            "rustMethodName": "participants",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<Address>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getVipParticipants",
+            "rustMethodName": "vip_participants",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<Address>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getRegistrationFee",
+            "rustMethodName": "registration_fee",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getRegistrationFeeVip",
+            "rustMethodName": "registration_fee_vip",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getUsedDiscountCodes",
+            "rustMethodName": "used_discount_codes",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<bytes>",
+                    "multi_result": true
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": false,
+    "types": {}
+}
